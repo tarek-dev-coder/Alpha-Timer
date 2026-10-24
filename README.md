@@ -22,5 +22,16 @@ All task and settings data stays in your browser's `localStorage`.
 
 ---
 
+## Project Structure
+- `index.html` - app entry page
+- `assets/css/styles.css` - layout, themes, and responsive styles
+- `assets/js/theme-toggle.js` - early theme setup and toggle
+- `assets/js/timer.js` - timer, task, and settings logic
+- `assets/icons/` - favicon, Apple touch, and PWA icons
+- `manifest.json` - web app manifest
+- `robots.txt` - crawler rules
+
+---
+
 ## License
 Licensed under **ALPHA.DEV License**.
