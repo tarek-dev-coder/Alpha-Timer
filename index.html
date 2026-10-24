@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+        <meta charset="UTF-8">
+        <meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self'; style-src 'self'; img-src 'self'; font-src 'self'; manifest-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'none'; form-action 'none'; frame-src 'none'">
+        <meta name="description" content="Alpha Timer - a Pomodoro timer with tasks, work/break sessions and a light/dark theme.">
+        <meta name="theme-color" content="#0a0a1a">
+        <meta name="referrer" content="no-referrer">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Alpha Timer (By Alpha.Dev)</title>
+        <link rel="stylesheet" href="styles.css">
+        <script src="theme-toggle.js"></script>
+        <link rel="icon" type="image/svg+xml" href="favicon.svg">
+        <link rel="icon" type="image/png" sizes="48x48" href="favicon-48.png">
+        <link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="favicon-16.png">
+        <link rel="icon" type="image/x-icon" href="favicon.ico" sizes="any">
+        <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+        <link rel="manifest" href="manifest.json">
+</head>
+<body>
+        <main class="container">
+                <h1>Alpha Timer</h1>
+                <div id="session-status" role="status">Work session</div>
+                <div class="timer" id="timer" role="timer" aria-label="Time remaining" aria-live="off">25:00</div>
+                <div class="controls">
+                        <button type="button" id="start">Start</button>
+                        <button type="button" id="skip">Skip</button>
+                        <button type="button" id="reset">Reset</button>
+                        <button type="button" id="toggle-theme" aria-pressed="false">Toggle Theme</button>
+                </div>
+                <noscript>
+                        <p>Alpha Timer needs JavaScript enabled to work.</p>
+                </noscript>
+                <div class="task-list">
+                        <h2>Tasks</h2>
+                        <div id="tasks"></div>
+                        <input type="text" id="task-input" placeholder="New task" aria-label="New task" maxlength="500" autocomplete="off">
+                        <button type="button" id="add-task">Add Task</button>
+                </div>
+                <div class="settings">
+                        <h2>Settings</h2>
+                        <label for="work-duration">Work Duration (minutes):</label>
+                        <input type="number" id="work-duration" value="25" min="1" max="1440" step="1">
+                        <br>
+                        <label for="break-duration">Break Duration (minutes):</label>
+                        <input type="number" id="break-duration" value="5" min="1" max="1440" step="1">
+                </div>
+        </main>
+        <footer>
+                <p>Made by ALPHA.DEV &copy; <span id="year">2026</span> ALPHA.DEV. All rights reserved.</p>
+        </footer>
+        <script src="timer.js"></script>
+</body>
+</html>

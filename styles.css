@@ -1,0 +1,280 @@
+:root {
+        color-scheme: dark;
+        --background-color: #0a0a1a;
+        --text-color: #ffffff;
+        --highlight-color: #00f7ff;
+        --highlight-soft: rgba(0, 247, 255, 0.10);
+        --highlight-glow: rgba(0, 247, 255, 0.35);
+        --highlight-glow-strong: rgba(0, 247, 255, 0.55);
+        --button-gradient: linear-gradient(135deg, #0077be, #005a8f);
+        --danger-gradient: linear-gradient(135deg, #c62828, #8e0000);
+        --danger-glow: rgba(255, 77, 77, 0.35);
+        --danger-glow-strong: rgba(255, 77, 77, 0.55);
+        --input-background: rgba(255, 255, 255, 0.10);
+        --input-text-color: #ffffff;
+}
+
+body {
+        font-family: system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+        max-width: 1000px;
+        margin: 0 auto;
+        padding: 10px;
+        background-color: var(--background-color);
+        color: var(--text-color);
+        border: 5px solid var(--highlight-color);
+        border-radius: 20px;
+        box-shadow: 0 0 20px var(--highlight-glow);
+        animation: fadeIn 1s ease-in-out;
+}
+
+@keyframes fadeIn {
+        from { opacity: 0; }
+        to { opacity: 1; }
+}
+
+.container {
+        background: rgba(255, 255, 255, 0.05);
+        -webkit-backdrop-filter: blur(10px);
+        backdrop-filter: blur(10px);
+        border-radius: 20px;
+        padding: 20px;
+        box-shadow: 0 0 20px var(--highlight-glow);
+        animation: slideIn 1s ease-in-out;
+}
+
+@keyframes slideIn {
+        from { transform: translateY(-50px); opacity: 0; }
+        to { transform: translateY(0); opacity: 1; }
+}
+
+.timer {
+        text-align: center;
+        font-size: 72px;
+        margin: 20px 0;
+        font-weight: 300;
+        font-variant-numeric: tabular-nums; /* Keep the digits from jittering */
+        color: var(--highlight-color);
+        text-shadow: 0 0 20px var(--highlight-glow);
+        animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+        0%, 100% { transform: scale(1); }
+        50% { transform: scale(1.1); }
+}
+
+.controls {
+        text-align: center;
+        margin: 10px 0;
+}
+
+button {
+        padding: 10px 20px;
+        margin: 5px;
+        font-size: 16px;
+        cursor: pointer;
+        background: var(--button-gradient);
+        border: none;
+        border-radius: 25px;
+        color: #ffffff;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        box-shadow: 0 0 15px var(--highlight-glow);
+        font-family: inherit;
+}
+
+button:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 0 20px var(--highlight-glow-strong);
+}
+
+button:active {
+        transform: translateY(0) scale(0.98);
+}
+
+input[type="number"],
+input[type="text"] {
+        background: var(--input-background);
+        border: 1px solid var(--highlight-color);
+        border-radius: 15px;
+        padding: 8px 15px;
+        color: var(--input-text-color);
+        margin: 5px;
+        box-sizing: border-box;
+        width: calc(100% - 10px);
+        font-family: inherit;
+        animation: fadeIn 1s ease-in-out;
+}
+
+::placeholder {
+        color: rgba(255, 255, 255, 0.70);
+        opacity: 1;
+}
+
+.task-list {
+        margin-top: 20px;
+        border: 2px solid var(--highlight-color);
+        padding: 15px;
+        border-radius: 15px;
+        background: rgba(0, 0, 0, 0.1);
+        box-shadow: 0 0 15px var(--highlight-glow);
+        animation: slideIn 1s ease-in-out;
+        text-align: center;
+}
+
+#task-input {
+        margin-top: 16px;
+}
+
+.task {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        overflow-wrap: anywhere;
+        padding: 10px;
+        margin: 10px 0;
+        background: rgba(255, 255, 255, 0.05);
+        border-radius: 15px;
+        border: 1px solid var(--highlight-soft);
+        transition: background 0.3s ease;
+}
+
+.task > * {
+        min-width: 0;
+        max-width: 100%;
+}
+
+.task-text {
+        flex: 1 1 auto;
+        padding: 2px 4px;
+        text-align: left;
+        cursor: pointer;
+}
+
+/* Tasks are dimmed while a break session is running. */
+.task.break .task-text {
+        opacity: 0.75;
+}
+
+.task:hover {
+        background: var(--highlight-soft);
+}
+
+.completed .task-text {
+        text-decoration: line-through;
+        opacity: 0.7;
+}
+
+.settings {
+        margin-top: 20px;
+        background: rgba(255, 255, 255, 0.03);
+        padding: 15px;
+        border-radius: 15px;
+        animation: fadeIn 1s ease-in-out;
+}
+
+h1, h2 {
+        color: var(--highlight-color);
+        font-weight: 400;
+        text-align: center;
+        font-family: inherit;
+        animation: fadeIn 1s ease-in-out;
+}
+
+.light-theme {
+        color-scheme: light;
+        --background-color: #ffffff;
+        --text-color: #000000;
+        --highlight-color: #c2410c;
+        --highlight-soft: rgba(194, 65, 12, 0.10);
+        --highlight-glow: rgba(194, 65, 12, 0.25);
+        --highlight-glow-strong: rgba(194, 65, 12, 0.40);
+        --button-gradient: linear-gradient(135deg, #c2410c, #9a3412);
+        --input-background: rgba(0, 0, 0, 0.10);
+        --input-text-color: #000000;
+}
+
+.light-theme ::placeholder {
+        color: rgba(0, 0, 0, 0.60);
+}
+
+.light-theme .container {
+        background: rgba(0, 0, 0, 0.05);
+}
+
+.light-theme .timer {
+        text-shadow: none;
+}
+
+.light-theme .task {
+        background: rgba(0, 0, 0, 0.05);
+}
+
+.light-theme .task:hover {
+        background: var(--highlight-soft);
+}
+
+.light-theme .settings {
+        background: rgba(0, 0, 0, 0.05);
+}
+
+@media (max-width: 600px) {
+        .timer {
+                font-size: 48px;
+        }
+
+        button {
+                padding: 8px 15px;
+                font-size: 14px;
+        }
+
+        .task {
+                flex-direction: column;
+                align-items: flex-start;
+        }
+}
+
+footer {
+        text-align: center;
+        margin-top: 20px;
+        color: var(--highlight-color);
+        animation: fadeIn 1s ease-in-out;
+}
+
+.remove-task {
+        flex: 0 0 auto;
+        background: var(--danger-gradient);
+        border: none;
+        border-radius: 15px;
+        color: #ffffff;
+        padding: 5px 10px;
+        margin-left: 10px;
+        cursor: pointer;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        box-shadow: 0 0 10px var(--danger-glow);
+}
+
+.remove-task:hover {
+        transform: translateY(-1px);
+        box-shadow: 0 0 15px var(--danger-glow-strong);
+}
+
+.task-text:focus-visible,
+button:focus-visible,
+input:focus-visible {
+        outline: 2px solid var(--highlight-color);
+        outline-offset: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+        *, *::before, *::after {
+                animation: none !important;
+                transition: none !important;
+        }
+
+        button:hover,
+        button:active,
+        .remove-task:hover,
+        .remove-task:active {
+                transform: none;
+        }
+}

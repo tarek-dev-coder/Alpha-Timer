@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="Alpha Timer">
+        <rect width="64" height="64" rx="14" fill="#0a0a1a"/>
+        <circle cx="32" cy="35" r="19" fill="none" stroke="#00f7ff" stroke-width="4"/>
+        <path d="M32 25v10l8 5" fill="none" stroke="#00f7ff" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+        <rect x="26" y="7" width="12" height="6" rx="1.5" fill="#00f7ff"/>
+        <rect x="30" y="12" width="4" height="5" fill="#00f7ff"/>
+</svg>

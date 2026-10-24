@@ -1,0 +1,38 @@
+{
+        "id": "./",
+        "name": "Alpha Timer",
+        "short_name": "Alpha Timer",
+        "description": "A Pomodoro timer with tasks, work/break sessions and a light/dark theme.",
+        "lang": "en",
+        "dir": "ltr",
+        "start_url": "./",
+        "scope": "./",
+        "display": "standalone",
+        "orientation": "any",
+        "background_color": "#0a0a1a",
+        "theme_color": "#0a0a1a",
+        "categories": [
+                "productivity",
+                "utilities"
+        ],
+        "icons": [
+                {
+                        "src": "icon-192.png",
+                        "sizes": "192x192",
+                        "type": "image/png",
+                        "purpose": "any"
+                },
+                {
+                        "src": "icon-512.png",
+                        "sizes": "512x512",
+                        "type": "image/png",
+                        "purpose": "any"
+                },
+                {
+                        "src": "favicon.svg",
+                        "sizes": "any",
+                        "type": "image/svg+xml",
+                        "purpose": "any"
+                }
+        ]
+}
