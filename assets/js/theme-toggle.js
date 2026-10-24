@@ -1,6 +1,19 @@
 'use strict';
 
 (function initThemeToggle() {
+        // GitHub Pages cannot send a frame-ancestors response header. Refuse to
+        // render inside a frame as a clickjacking fallback; the app is not meant
+        // to be embedded. See SECURITY.md.
+        try {
+                if (window.top !== window.self) {
+                        document.documentElement.hidden = true;
+                        return;
+                }
+        } catch (error) {
+                document.documentElement.hidden = true;
+                return;
+        }
+
         const STORAGE_KEY = 'alphaTimer.theme';
         const LEGACY_STORAGE_KEY = 'theme';
         const LIGHT_CLASS = 'light-theme';

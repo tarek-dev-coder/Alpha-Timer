@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
         <meta charset="UTF-8">
-        <meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self'; style-src 'self'; img-src 'self'; font-src 'self'; manifest-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'none'; form-action 'none'; frame-src 'none'">
+        <meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self'; script-src-elem 'self'; script-src-attr 'none'; style-src 'self'; style-src-elem 'self'; style-src-attr 'none'; img-src 'self'; font-src 'none'; media-src 'none'; manifest-src 'self'; connect-src 'self'; worker-src 'none'; child-src 'none'; object-src 'none'; base-uri 'none'; form-action 'none'; frame-src 'none'; require-trusted-types-for 'script'; trusted-types 'none'">
         <meta name="description" content="Alpha Timer - a Pomodoro timer with tasks, work/break sessions and a light/dark theme.">
         <meta name="theme-color" content="#0a0a1a">
         <meta name="referrer" content="no-referrer">
@@ -35,16 +35,16 @@
                 <div class="task-list">
                         <h2>Tasks</h2>
                         <div id="tasks"></div>
-                        <input type="text" id="task-input" placeholder="New task" aria-label="New task" maxlength="500" autocomplete="off">
+                        <input type="text" id="task-input" placeholder="New task" aria-label="New task" maxlength="500" autocomplete="off" spellcheck="false">
                         <button type="button" id="add-task">Add Task</button>
                 </div>
                 <div class="settings">
                         <h2>Settings</h2>
                         <label for="work-duration">Work Duration (minutes):</label>
-                        <input type="number" id="work-duration" value="25" min="1" max="1440" step="1">
+                        <input type="number" id="work-duration" value="25" min="1" max="1440" step="1" inputmode="numeric" autocomplete="off">
                         <br>
                         <label for="break-duration">Break Duration (minutes):</label>
-                        <input type="number" id="break-duration" value="5" min="1" max="1440" step="1">
+                        <input type="number" id="break-duration" value="5" min="1" max="1440" step="1" inputmode="numeric" autocomplete="off">
                 </div>
         </main>
         <footer>

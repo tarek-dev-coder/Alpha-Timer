@@ -18,12 +18,28 @@
  *    and Enter during IME composition does not add a half-typed task.
  */
 (function initAlphaTimer() {
+        // GitHub Pages cannot send a frame-ancestors response header. Do not
+        // initialize the app inside a frame (clickjacking fallback). The theme
+        // script hides the document; this also prevents hidden timer activity.
+        try {
+                if (window.top !== window.self) {
+                        document.documentElement.hidden = true;
+                        return;
+                }
+        } catch (error) {
+                document.documentElement.hidden = true;
+                return;
+        }
+
         const DEFAULT_WORK_MINUTES = 25;
         const DEFAULT_BREAK_MINUTES = 5;
         const MIN_MINUTES = 1;
         const MAX_MINUTES = 1440;
         const MAX_TASK_LENGTH = 500;
         const MAX_TASKS = 500;
+        // A valid list of 500 maximum-length tasks is well under this limit.
+        // Reject oversized foreign values before JSON.parse to bound work.
+        const MAX_STORED_TASKS_LENGTH = 1000000;
         const TICK_INTERVAL_MS = 250;
 
         const STORAGE_PREFIX = 'alphaTimer.';
@@ -117,7 +133,7 @@
         function migrateStorage() {
                 if (readStorage(STORAGE_KEYS.tasks) === null) {
                         const legacyTasks = readLegacyStorage(LEGACY_STORAGE_KEYS.tasks);
-                        if (legacyTasks !== null) {
+                        if (legacyTasks !== null && legacyTasks.length <= MAX_STORED_TASKS_LENGTH) {
                                 try {
                                         const parsed = JSON.parse(legacyTasks);
                                         const isValid = Array.isArray(parsed) && parsed.every(function (entry) {
@@ -143,7 +159,10 @@
          * ------------------------------------------------------------------ */
 
         function formatTime(totalSeconds) {
-                const safeSeconds = Math.max(0, Math.floor(Number(totalSeconds) || 0));
+                const numericSeconds = Number(totalSeconds);
+                const safeSeconds = Number.isFinite(numericSeconds)
+                        ? Math.max(0, Math.floor(numericSeconds))
+                        : 0;
                 const minutes = Math.floor(safeSeconds / 60);
                 const seconds = safeSeconds % 60;
                 return String(minutes).padStart(2, '0') + ':' + String(seconds).padStart(2, '0');
@@ -183,7 +202,11 @@
          * ------------------------------------------------------------------ */
 
         function setRemaining(seconds) {
-                currentTime = Math.max(0, Math.round(Number(seconds) || 0));
+                const numericSeconds = Number(seconds);
+                const safeSeconds = Number.isFinite(numericSeconds)
+                        ? Math.min(Math.max(0, Math.round(numericSeconds)), MAX_MINUTES * 60)
+                        : 0;
+                currentTime = safeSeconds;
                 deadline = Date.now() + currentTime * 1000;
                 updateTimerDisplay();
         }
@@ -213,12 +236,13 @@
                 if (state !== 'running') {
                         return;
                 }
-                const remaining = Math.max(0, Math.ceil((deadline - Date.now()) / 1000));
-                if (remaining !== currentTime) {
-                        currentTime = remaining;
+                const remaining = Math.ceil((deadline - Date.now()) / 1000);
+                const safeRemaining = Number.isFinite(remaining) ? Math.max(0, remaining) : 0;
+                if (safeRemaining !== currentTime) {
+                        currentTime = safeRemaining;
                         updateTimerDisplay();
                 }
-                if (currentTime <= 0) {
+                if (safeRemaining <= 0) {
                         finishSession();
                 }
         }
@@ -403,7 +427,7 @@
                 const raw = readStorage(STORAGE_KEYS.tasks);
                 let storedTasks = [];
 
-                if (raw) {
+                if (raw && raw.length <= MAX_STORED_TASKS_LENGTH) {
                         try {
                                 const parsed = JSON.parse(raw);
                                 if (Array.isArray(parsed)) {
@@ -501,7 +525,8 @@
                 if (state !== 'running') {
                         return;
                 }
-                currentTime = Math.max(0, Math.ceil((deadline - Date.now()) / 1000));
+                const remaining = Math.ceil((deadline - Date.now()) / 1000);
+                currentTime = Number.isFinite(remaining) ? Math.max(0, remaining) : 0;
                 clearTicking();
                 state = 'paused';
                 updateTimerDisplay();

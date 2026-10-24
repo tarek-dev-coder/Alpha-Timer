@@ -30,6 +30,12 @@ All task and settings data stays in your browser's `localStorage`.
 - `assets/icons/` - favicon, Apple touch, and PWA icons
 - `manifest.json` - web app manifest
 - `robots.txt` - crawler rules
+- `SECURITY.md` - security policy and private reporting
+
+---
+
+## Security
+See [SECURITY.md](SECURITY.md) for the security model and private reporting instructions. The app is static, uses no third-party resources, and keeps data only in your browser.
 
 ---
 
